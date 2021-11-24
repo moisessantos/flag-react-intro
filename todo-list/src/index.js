@@ -5,6 +5,7 @@ import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
+    <input id="todo" value />
     <App />
   </React.StrictMode>,
   document.getElementById('root')

@@ -10,13 +10,22 @@ class App extends React.Component {
         };
         this.addTodo = this.addTodo.bind(this);
         this.changeValue = this.changeValue.bind(this);
+        this.deleteTodo = this.deleteTodo.bind(this);
     }
 
-    changeValue(e) {
+    changeValue(e){
         this.setState({
             todos: this.state.todos,
             value: this.state.value + e.key
         })
+    }
+
+    deleteTodo() {
+        const newTodos = this.state.todos;
+        newTodos.pop();
+        this.setState({
+            todos: newTodos,
+        });
     }
 
     addTodo() {
@@ -39,7 +48,7 @@ class App extends React.Component {
                 </ul>
                 <input type="text" value={this.state.value} onKeyDown={this.changeValue} />
                 <button onClick={this.addTodo}>Add</button>
-                <button onClick={console.log}>Delete</button>
+                <button onClick={this.deleteTodo}>Delete</button>
             </div >
         );
     }

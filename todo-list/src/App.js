@@ -5,10 +5,29 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            todos: ["Vestir roupa", "Lavar os dentes", "Ir às compras"]
+            todos: ["Vestir roupa", "Lavar os dentes", "Ir às compras"],
+            value: ''
         };
+        this.addTodo = this.addTodo.bind(this);
+        this.changeValue = this.changeValue.bind(this);
     }
-    
+
+    changeValue(e) {
+        this.setState({
+            todos: this.state.todos,
+            value: this.state.value + e.key
+        })
+    }
+
+    addTodo() {
+        const newTodos = this.state.todos;
+        newTodos.push(this.state.value);
+        this.setState({
+            todos: newTodos,
+            value: ''
+        });
+    }
+
     render() {
         return (
             <div className={styles.container}>
@@ -17,11 +36,10 @@ class App extends React.Component {
                     {this.state.todos.map((valor) => {
                         return <li>{valor}</li>
                     })}
-                    <li>
-                        <button onClick={}>Add</button>
-                        <button onClick={}>Delete</button>
-                    </li>
                 </ul>
+                <input type="text" value={this.state.value} onKeyDown={this.changeValue} />
+                <button onClick={this.addTodo}>Add</button>
+                <button onClick={console.log}>Delete</button>
             </div >
         );
     }

@@ -19,6 +19,11 @@ class App extends React.Component {
                     {list.map((valor) => {
                         return <li>{valor}</li>
                     })}
+                    <li><button onClick={
+                        function() {
+                            list.push("Apanhar o autocarro");
+                        }
+                    }>add</button></li>
                 </ul>
             </div >
         );

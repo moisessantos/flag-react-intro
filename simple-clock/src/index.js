@@ -4,7 +4,7 @@ import Clock from './Clock';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Clock />
+    <Clock startPlaying={false} />
   </React.StrictMode>,
   document.getElementById('root')
 );

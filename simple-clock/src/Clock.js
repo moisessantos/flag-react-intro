@@ -1,11 +1,11 @@
 import React from "react";
 
 class Clock extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             time: new Date().toLocaleTimeString(),
-            isPlaying: true
+            isPlaying: props.startPlaying
         }
         this.interval = null;
         this.start = this.start.bind(this);
@@ -29,7 +29,9 @@ class Clock extends React.Component {
     }
 
     componentDidMount() {
-        this.start();
+        if(this.state.isPlaying) {
+            this.start();
+        }
     }
 
     componentWillUnmount() {

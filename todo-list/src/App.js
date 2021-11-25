@@ -1,4 +1,5 @@
 import React from 'react';
+import Todo from './Todo';
 import styles from './App.module.css';
 
 class App extends React.Component {
@@ -16,15 +17,14 @@ class App extends React.Component {
     changeValue(e){
         this.setState({
             todos: this.state.todos,
-            value: this.state.value + e.target.value
+            value: e.target.value
         })
     }
 
-    deleteTodo(todo) {
+    deleteTodo(todoToDelete) {
         const newTodos = this.state.todos;
-        newTodos.pop();
         this.setState({
-            todos: newTodos,
+            todos: newTodos.filter((todo) => todo !== todoToDelete),
         });
     }
 
@@ -41,15 +41,9 @@ class App extends React.Component {
         return (
             <div className={styles.container}>
                 <h1>A minha lista de afazeres</h1>
+                <Todo>Estudar React</Todo>
                 <ul>
-                    {this.state.todos.map((valor) => {
-                        return (
-                            <li key={valor}>
-                                <span>{valor}</span>
-                                <button onClick={() => this.deleteTodo("")}>Delete</button>
-                            </li>
-                        );
-                    })}
+                    {this.state.todos.map((valor) => <Todo key={valor} onDelete={() => this.deleteTodo(valor)}>{valor}</Todo>)}
                 </ul>
                 <input type="text" value={this.state.value} onChange={this.changeValue} />
                 <button onClick={this.addTodo}>Add</button>

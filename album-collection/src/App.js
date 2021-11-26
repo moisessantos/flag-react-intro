@@ -37,10 +37,11 @@ class App extends Component {
     return (
       <div className={styles.container}>
         <ul>
-          {this.state.data.map((album) => (
+          {this.state.data.map((album, index) => (
             <Album
               key={album.id}
               album={album}
+              data-testid={index}
               fetchUser={() => this.getUserById(album.userId)}
               authorName={this.state.users.find(author => author.id === album.userId)?.name}
             />)

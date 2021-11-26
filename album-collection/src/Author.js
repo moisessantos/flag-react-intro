@@ -1,16 +1,8 @@
 import React from "react";
 
-class Author extends React.Component {
-    // shouldComponentUpdate(nextProps) {
-    //     return this.props.name !== nextProps.name;
-    // }
-
-    render() {
-        if(this.props.name) {
-            return <div className={this.props.className}>{this.props.name}</div>
-        }
-        return <button onClick={this.props.fetchUser}>?</button>
-    }
-}
+const Author = ({ name, className, fetchUser}) => (
+        name ? <div className={className}>{name}</div> : 
+        <button onClick={fetchUser}>?</button>
+);
 
 export default Author;

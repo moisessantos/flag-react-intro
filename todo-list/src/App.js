@@ -9,26 +9,23 @@ class App extends React.Component {
             todos: ["Vestir roupa", "Lavar os dentes", "Ir às compras", "Ir ao shopping"],
             value: ''
         };
-        this.addTodo = this.addTodo.bind(this);
-        this.changeValue = this.changeValue.bind(this);
-        this.deleteTodo = this.deleteTodo.bind(this);
     }
 
-    changeValue(e){
+    changeValue = (e) => {
         this.setState({
             todos: this.state.todos,
             value: e.target.value
         })
     }
 
-    deleteTodo(todoToDelete) {
+    deleteTodo = (todoToDelete) => {
         const newTodos = this.state.todos;
         this.setState({
             todos: newTodos.filter((todo) => todo !== todoToDelete),
         });
     }
 
-    addTodo() {
+    addTodo = () => {
         const newTodos = this.state.todos;
         newTodos.push(this.state.value);
         this.setState({
@@ -47,7 +44,7 @@ class App extends React.Component {
                 </ul>
                 <input type="text" value={this.state.value} onChange={this.changeValue} />
                 <button onClick={this.addTodo}>Add</button>
-            </div >
+            </div>
         );
     }
 }

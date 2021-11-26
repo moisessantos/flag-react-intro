@@ -2,14 +2,13 @@ import React from "react";
 import UserList from "./users-list";
 import AlbumList from "./albums-list";
 
-class App extends React {
+class App extends React.Component {
   constructor(){
     super();
     this.state = {
       users: [],
       albumsByUserId: {},
       currentUserId: undefined,
-      //albums: []
     }
     this.getAlbumsByUserId = this.getAlbumsByUserId.bind(this);
   }

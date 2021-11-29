@@ -1,25 +1,69 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Result from './components/Result';
+import { KeyPad } from './components';
+import { ClickContext } from './ClickContext';
+
+class App extends Component {
+  constructor(){
+      super();
+
+      this.state = {
+          result: ""
+      }
+  }
+
+  onClick = button => {
+      if(button === "="){
+          this.calculate();
+      } else if(button === "C"){
+            this.reset();
+      } else if(button === "CE"){
+          this.backspace();
+      } else {
+          this.setState({ result: this.state.result + button });
+      }
+  };
+
+  reset = () => {
+    this.setState({ result: "" });
+  };
+
+  calculate = () => {
+      let { result } = this.state;
+      result = this.state.result.includes('--') ? result.replace('--','+') : result;
+
+      try {
+          this.setState({
+              // eslint-disable-next-line
+              result: eval(result) + ""
+          })
+      } catch (e) {
+          this.setState({
+              result: "error"
+          })
+      }
+  };
+
+  backspace = () => {
+      this.setState({
+          result: this.state.result.slice(0, -1)
+      })
+  };
+
+  render() {
+      return (
+          <div>
+              <div className="calculator-body">
+                  <h1>Simple Calculator</h1>
+                  <Result>{this.state.result}</Result>
+                  <ClickContext.Provider value={this.onClick}>
+                    <KeyPad />
+                  </ClickContext.Provider>
+              </div>
+          </div>
+      );
+  }
 }
 
 export default App;

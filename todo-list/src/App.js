@@ -13,7 +13,6 @@ class App extends React.Component {
 
     changeValue = (e) => {
         this.setState({
-            todos: this.state.todos,
             value: e.target.value
         })
     }

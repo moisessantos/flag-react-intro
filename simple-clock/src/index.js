@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Clock from './Clock';
+import Clock from './FunctionalClock';
+// import Clock from './Clock';
 
 ReactDOM.render(
   <React.StrictMode>

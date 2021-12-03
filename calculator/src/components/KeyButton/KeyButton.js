@@ -7,6 +7,7 @@ import styles from './KeyButton.module.css';
 
 const KeyButton = ({ text, ...otherProps }) => {
   const handleClick = useClickContext();
+  console.warn("render");
   return (
     <Button
       variant="secondary"

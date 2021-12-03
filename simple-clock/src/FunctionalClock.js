@@ -1,28 +1,29 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 
 const FunctionalClock = (props) => {
     const [time, setTime] = useState(new Date().toLocaleTimeString()) //time,
     const [isPlaying, setIsPlaying] = useState(props.startPlaying) //isPlaying
-    let interval = null;
-
-    function stop() {
-        clearInterval(interval);
-        setIsPlaying(false);
-    }
+    let interval = useRef(null);
 
     const start = useCallback(() => {
-        interval = setInterval(() => {
-            setTime(new Date().toLocaleTimeString());
-            setIsPlaying(true);
-        }, 1000);
+        setIsPlaying(true);
     }, []);
 
+    const stop = useCallback(() => {
+        setIsPlaying(false);
+    }, []);
+    
     useEffect(() => {
         if (isPlaying) {
-            start();
+            interval.current = setInterval(() => {
+                setTime(new Date().toLocaleTimeString());
+                setIsPlaying(true);
+            }, 1000);
+        } else {
+            clearInterval(interval.current);
         }
-        return clearInterval(interval);
-    }, [isPlaying, interval, start]);
+        return () => clearInterval(interval.current);
+    }, [isPlaying, interval]);
 
     return (
         <div>

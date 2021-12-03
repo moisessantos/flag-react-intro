@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import Result from './components/Result';
 import { KeyPad } from './components';
@@ -6,7 +6,24 @@ import { ClickContext } from './ClickContext';
 
 const FunctionalApp = () => {
     const [result, setResult] = useState("");
-    const onClick = button => {
+    const reset = useCallback(() => {
+        setResult("");
+    }, [setResult]);
+
+    const calculate = useCallback(() => {
+        const newResult = result.includes('--') ? result.replace('--', '+') : result;
+        try {
+            setResult(eval(newResult) + "");
+        } catch (e) {
+            setResult("error")
+        }
+    }, [setResult, result]);
+
+    const backspace = useCallback(() => {
+        setResult(result.slice(0, -1));
+    }, [setResult, result]);
+
+    const onClick = useCallback(button => {
         if (button === "=") {
             calculate();
         } else if (button === "C") {
@@ -16,24 +33,7 @@ const FunctionalApp = () => {
         } else {
             setResult(result + button);
         }
-    };
-
-    reset = () => {
-        setResult("");
-    };
-
-    calculate = () => {
-        const newResult = result.includes('--') ? result.replace('--', '+') : result;
-        try {
-            setResult(eval(newResult) + "");
-        } catch (e) {
-            setResult("error")
-        }
-    };
-
-    backspace = () => {
-        setResult(result.slice(0, -1));
-    };
+    }, [backspace, reset, calculate, result, setResult]);
 
     return (
         <div>
@@ -48,4 +48,4 @@ const FunctionalApp = () => {
     );
 }
 
-export default App;
+export default FunctionalApp;

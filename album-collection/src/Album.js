@@ -3,12 +3,12 @@ import Author from './Author';
 import styles from './Album.module.css';
 
 class Album extends React.Component {
-    shouldComponentUpdate(nextProps){
-      if(nextProps.album.title !== this.props.album.title || this.props.authorName !== nextProps.authorName) {
-        return true;
-      }
-      return false;
-    }
+    // shouldComponentUpdate(nextProps){
+    //   if(nextProps.album.title !== this.props.album.title || this.props.authorName !== nextProps.authorName) {
+    //     return true;
+    //   }
+    //   return false;
+    // }
 
     render() {
       const { album, authorName, fetchUser, ...otherProps } = this.props;

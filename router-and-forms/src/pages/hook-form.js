@@ -1,14 +1,19 @@
 import { useForm } from "react-hook-form";
 
 import React from "react";
+import { useParams } from "react-router-dom";
 
 export default function HookForm() {
+  const { name } = useParams();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     // mode: "all"
+    defaultValues: {
+      firstName: name
+    }
   });
 
   return (

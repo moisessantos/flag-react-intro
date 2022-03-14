@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { BackButton } from '../components/back-button';
 import routes from '../routes';
 
 export default function NotFound() {
@@ -11,6 +12,7 @@ export default function NotFound() {
             <li><Link to={routes.ReactForm}>React</Link></li>
             <li><Link to={routes.FormikForm}>Formik</Link></li>
         </ul>
+        <BackButton />
     </>
   )
 }

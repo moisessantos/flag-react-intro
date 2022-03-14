@@ -13,7 +13,9 @@ function App() {
             <Route path=":name" element={<ReactForm />} />
           </Route>
           <Route path={routes.FormikForm} element={<FormikForm />} />
-          <Route path={routes.HookForm} element={<HookForm />} />
+          <Route path={routes.HookForm} element={<HookForm />}>
+            <Route path=":name" element={<HookForm />} />
+          </Route>
           <Route index element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
